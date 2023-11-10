@@ -14,18 +14,20 @@ namespace Datos
         #region ATRIBUTOS
         private int idAlumno;
         private string nombre;
+        private string apellido;
         private int dni;
+        private int edad;
         private string email;
-        private string password;
         OleDbParameter[] lista = null;
         #endregion
 
         #region PROPERTIES
         public int IdAlumno { get => idAlumno; set { idAlumno = value; } }
         public string Nombre { get => nombre; set { nombre = value; } }
+        public string Apellido { get => apellido; set { apellido = value; } }
         public int Dni { get => dni; set { dni = value; } }
+        public int Edad { get => edad; set { edad = value; } }
         public string Email { get => email; set { email = value; } }
-        public string Password { get => password; set { password = value; } }
         #endregion
 
         #region METODOS
@@ -50,27 +52,29 @@ namespace Datos
         public void InsertarAlumno()
         {
             //instruccion sql parametrizada
-            string sSql = "INSERT INTO Alumnos (Nombre, Dni, Email, Password) values (?,?,?,?)";
+            string sSql = "INSERT INTO Alumno (Nombre, Apellido, Dni, Edad, Email) values (?,?,?,?,?)";
             OleDbParameter param1 = new OleDbParameter("Nombre", Nombre );
-            OleDbParameter param2 = new OleDbParameter("Dni", Dni);
-            OleDbParameter param3 = new OleDbParameter("Email", Email);
-            OleDbParameter param4 = new OleDbParameter("Password", Password);
+            OleDbParameter param2 = new OleDbParameter("Apellido", Apellido);
+            OleDbParameter param3 = new OleDbParameter("Dni", Dni);
+            OleDbParameter param4 = new OleDbParameter("Edad", Edad);
+            OleDbParameter param5 = new OleDbParameter("Email", Email);
             //creo una lista con los parametros
-            List<OleDbParameter> ListaParametros = new List<OleDbParameter>() { param1 , param2 , param3 , param4};
+            List<OleDbParameter> ListaParametros = new List<OleDbParameter>() { param1 , param2 , param3 , param4, param5};
             lista = ListaParametros.ToArray(); //convierto la lista en un array
 
             Ejecutar (sSql, lista); // llamo al metodo ejecutar con la consulta sql y los parametros como argumentos
         }
         public void ModificarAlumno()
         {
-            string sSql = "UPDATE Alumnos set Nombre= ?, Dni =?, Email = ?, Password =? WHERE IdAlumno = ?";
+            string sSql = "UPDATE Alumno set Nombre= ?, Apellido= ?, Dni =?, Edad = ?, Email =? WHERE IdAlumno = ?";
             OleDbParameter param1 = new OleDbParameter("Nombre", Nombre);
-            OleDbParameter param2 = new OleDbParameter("Dni", Dni);
-            OleDbParameter param3 = new OleDbParameter("Email", Email);
-            OleDbParameter param4 = new OleDbParameter("Password", Password);
-            OleDbParameter param5 = new OleDbParameter ("IdAlumno", IdAlumno);
+            OleDbParameter param2 = new OleDbParameter("Apellido", Apellido);
+            OleDbParameter param3 = new OleDbParameter("Dni", Dni);
+            OleDbParameter param4 = new OleDbParameter("Edad", Edad);
+            OleDbParameter param5 = new OleDbParameter("Email", Email);
+            OleDbParameter param6 = new OleDbParameter ("IdAlumno", IdAlumno);
 
-            List<OleDbParameter> listaParametros = new List<OleDbParameter>() { param1, param2, param3, param4, param5};
+            List<OleDbParameter> listaParametros = new List<OleDbParameter>() { param1, param2, param3, param4, param5, param6};
             lista = listaParametros.ToArray();
 
             Ejecutar(sSql, lista);

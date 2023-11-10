@@ -1,6 +1,7 @@
 ﻿using Datos;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Data.OleDb;
 using System.Linq;
@@ -16,9 +17,10 @@ namespace Logica
         #region ATRIBUTOS
         private int idAlumno;
         private string nombre;
+        private string apellido;
         private int dni;
+        private int edad;
         private string email;
-        private string password;
         #endregion
 
         #region PROPERTIES
@@ -33,6 +35,18 @@ namespace Logica
                 }
             } 
         }
+        public string Apellido
+        {
+            get => apellido;
+            set
+            {
+                apellido = value;
+                if (String.IsNullOrEmpty(apellido))
+                {
+                    throw new Exception("El Apellido no puede ser nulo o vacío");
+                }
+            }
+        }
         public int Dni 
         { 
             get => dni; 
@@ -42,6 +56,18 @@ namespace Logica
                     throw new Exception("El dni no puede ser nulo o vacío");
                 }
             } 
+        }
+        public int Edad
+        {
+            get => edad;
+            set
+            {
+                edad = value;
+                if (String.IsNullOrEmpty(edad.ToString()))
+                {
+                    throw new Exception("la edad no puede ser nulo o vacío");
+                }
+            }
         }
         public string Email 
         { 
@@ -53,16 +79,7 @@ namespace Logica
                 }
             } 
         }
-        public string Password 
-        { 
-            get => password; 
-            set { password = value;
-                if (String.IsNullOrEmpty(password))
-                {
-                    throw new Exception("La clave no puede ser nula o vacía");
-                }
-            } 
-        }
+        
         #endregion
 
         #region METODOS
@@ -70,10 +87,31 @@ namespace Logica
         {
             return d_Alumnos.Buscar(datos);
         }
-        public void GuardarAlumno()
+        public void Guardar()
         {
-            
+            pasarDatos();
+            d_Alumnos.InsertarAlumno();
         }
+        private void pasarDatos()
+        {
+            d_Alumnos.IdAlumno = Convert.ToInt32(idAlumno);
+            d_Alumnos.Nombre = nombre;
+            d_Alumnos.Apellido = apellido;
+            d_Alumnos.Dni = dni;
+            d_Alumnos.Edad = edad;
+            d_Alumnos.Email = email;
+        }
+        public void Modificar()
+        {
+            pasarDatos();
+            d_Alumnos.ModificarAlumno();
+        }
+        public void Eliminar()
+        {
+            pasarDatos();
+            d_Alumnos.EliminarAlumno();
+        }
+
         #endregion
     }
 }
