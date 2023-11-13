@@ -21,15 +21,34 @@ namespace Vista
 
         private void BtnAceptar_Click(object sender, EventArgs e)
         {
-            traerPreceptor(txtEmail.ToString(), txtClave.ToString());
+            string email = txtEmail.Text;
+            string clave = txtClave.Text;
+
+            // Verificar si se ingresaron ambos campos
+            if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(clave))
+            {
+                MessageBox.Show("Por favor, ingrese el correo electrónico y la clave.", "Error de inicio de sesión", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return; // Salir del método sin continuar con la validación
+            }
+
+            // Realizar la operación de inicio de sesión y abrir el formulario principal
+            traerPreceptor(email, clave);
+
+
         }
         private void traerPreceptor(string mail = "", string clave = "")
         {
             guardarPreceptor();
             bool existePreceptor = l_Preceptor.LN_BuscarPreceptor(mail,clave);
-            frmAlumnos frmAlumnos = new frmAlumnos();
-            frmAlumnos.ShowDialog();
-
+            if (existePreceptor)
+            {
+                //this.Close();
+                this.Visible = false;
+                frmPrincipal frmPrincipal = new frmPrincipal();
+                frmPrincipal.ShowDialog();
+            }
+            else
+                MessageBox.Show("Correo electrónico y/o clave incorrectos.", "Error de inicio de sesión", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         private void guardarPreceptor()
         {

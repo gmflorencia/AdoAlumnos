@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Datos
 {
-    public class D_Alumnos : Conexion // aplico herencia 
+    public class D_Alumno : Conexion // aplico herencia 
     {
         #region ATRIBUTOS
         private int idAlumno;
@@ -48,6 +48,18 @@ namespace Datos
             }
             return Ejecutar(sSQL, lista, true);
         }
+        public DataTable BuscarPorCampo(string campo, string dato)
+        {
+            string sSQL;
+            
+            sSQL = "Select * from Alumno where " + campo + " = ? ";
+
+            OleDbParameter param1 = new OleDbParameter( campo,dato);
+            List<OleDbParameter> listaParametros = new List<OleDbParameter>() { param1 };
+            lista = listaParametros.ToArray();
+            
+            return Ejecutar(sSQL, lista, true);
+        }
         // Inserta un nuevo registro
         public void InsertarAlumno()
         {
@@ -75,6 +87,15 @@ namespace Datos
             OleDbParameter param6 = new OleDbParameter ("IdAlumno", IdAlumno);
 
             List<OleDbParameter> listaParametros = new List<OleDbParameter>() { param1, param2, param3, param4, param5, param6};
+            lista = listaParametros.ToArray();
+
+            Ejecutar(sSql, lista);
+        }
+        public void EliminarAlumnoAsignacion()
+        {
+            string sSql = "DELETE FROM AlumnoMateria WHERE IdAlumno = ?";
+            OleDbParameter param1 = new OleDbParameter("IdAlumno", IdAlumno);
+            List<OleDbParameter> listaParametros = new List<OleDbParameter>() { param1 };
             lista = listaParametros.ToArray();
 
             Ejecutar(sSql, lista);

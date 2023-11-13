@@ -58,6 +58,7 @@
             // 
             this.txtClave.Location = new System.Drawing.Point(300, 248);
             this.txtClave.Name = "txtClave";
+            this.txtClave.PasswordChar = '*';
             this.txtClave.Size = new System.Drawing.Size(176, 22);
             this.txtClave.TabIndex = 2;
             // 

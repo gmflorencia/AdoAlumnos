@@ -57,7 +57,8 @@ namespace Datos
             lista = listaParametros.ToArray();
 
             dtDatos = Ejecutar(sSQL, lista, true);
-            return dtDatos != null;
+            if (dtDatos.Rows.Count == 0) return false; 
+            return true;
         }
         #endregion
     }

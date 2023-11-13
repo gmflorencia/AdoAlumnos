@@ -58,7 +58,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="L_Alumnos.cs" />
+    <Compile Include="L_Alumno.cs" />
+    <Compile Include="L_AlumnoMateria.cs" />
+    <Compile Include="L_Materia.cs" />
     <Compile Include="L_Preceptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -86,10 +88,6 @@
     <ProjectReference Include="..\Datos\Datos.csproj">
       <Project>{2279d8ef-d9bc-48cf-842b-f489bdc4070f}</Project>
       <Name>Datos</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Servicios\Servicios.csproj">
-      <Project>{267867f7-b173-4153-9b97-95e91eea5a70}</Project>
-      <Name>Servicios</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

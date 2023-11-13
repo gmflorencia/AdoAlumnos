@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace Logica
 {
-    public class L_Alumnos
+    public class L_Alumno
     {
-        D_Alumnos d_Alumnos = new D_Alumnos();
+        D_Alumno d_Alumnos = new D_Alumno();
 
         #region ATRIBUTOS
         private int idAlumno;
@@ -25,7 +25,7 @@ namespace Logica
 
         #region PROPERTIES
         public int IdAlumno { get => idAlumno; set { idAlumno = value; } }
-        public string Nombre 
+        public string Nombre
         { 
             get => nombre; 
             set { nombre = value;
@@ -83,6 +83,10 @@ namespace Logica
         #endregion
 
         #region METODOS
+        public DataTable LN_BuscarPorDNI(string campo, string dato)
+        {
+            return d_Alumnos.BuscarPorCampo(campo, dato);
+        }
         public DataTable LN_BuscarTodos(string datos = "")
         {
             return d_Alumnos.Buscar(datos);
@@ -109,6 +113,7 @@ namespace Logica
         public void Eliminar()
         {
             pasarDatos();
+            d_Alumnos.EliminarAlumnoAsignacion();
             d_Alumnos.EliminarAlumno();
         }
 

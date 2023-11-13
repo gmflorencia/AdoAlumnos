@@ -49,9 +49,11 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="D_Alumnos.cs" />
+    <Compile Include="D_Alumno.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="D_AlumnoMateria.cs" />
+    <Compile Include="D_Materia.cs" />
     <Compile Include="D_Preceptor.cs" />
     <Compile Include="Conexion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -75,12 +77,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Servicios\Servicios.csproj">
-      <Project>{267867f7-b173-4153-9b97-95e91eea5a70}</Project>
-      <Name>Servicios</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

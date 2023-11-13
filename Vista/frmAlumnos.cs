@@ -8,12 +8,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Vista.Servicios;
+
 
 namespace Vista
 {
     public partial class frmAlumnos : Form
     {
-        L_Alumnos l_Alumnos = new L_Alumnos();
+        L_Alumno l_Alumnos = new L_Alumno();
         public frmAlumnos()
         {
             InitializeComponent();
@@ -41,10 +43,10 @@ namespace Vista
 
             buscarTodos();
         }
-
         private void BtnGuardar_Click(object sender, EventArgs e)
         {
             guardarAlumno();
+            Limpiar.LimpiarControles(this);
             buscarTodos();
         }
         private void BtnModificar_Click(object sender, EventArgs e)
@@ -52,7 +54,33 @@ namespace Vista
             modificarAlumno();
             buscarTodos();
         }
-
+        private void dgvAlumnos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int valor = Convert.ToInt32(dgvAlumnos.CurrentRow.Index);
+            l_Alumnos.IdAlumno = (int)dgvAlumnos[0, valor].Value;
+            txtNombre.Text = dgvAlumnos[1, valor].Value.ToString();
+            txtApellido.Text = dgvAlumnos[2, valor].Value.ToString();
+            txtDni.Text = dgvAlumnos[3, valor].Value.ToString();
+            txtEdad.Text = dgvAlumnos[4, valor].Value.ToString();
+            txtEmail.Text = dgvAlumnos[5, valor].Value.ToString();
+        }
+        private void BtnEliminar_Click(object sender, EventArgs e)
+        {
+            eliminarAlumno();
+            buscarTodos();
+        }
+        private void BtnSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        private void txtEdad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            SoloNumero.ValidarNro(e);
+        }
+        private void txtDni_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            SoloNumero.ValidarNro(e);
+        }
         #endregion
 
         #region Metodos
@@ -82,25 +110,14 @@ namespace Vista
         }
         private void eliminarAlumno()
         {
-            l_Alumnos.Eliminar();
+            DialogResult resultado = MessageBox.Show("¿Está seguro de Eliminar Alumno?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (resultado == DialogResult.Yes)
+            {
+                l_Alumnos.Eliminar();
+            }
         }
         #endregion
-
-        private void dgvAlumnos_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            int valor = Convert.ToInt32(dgvAlumnos.CurrentRow.Index);
-            l_Alumnos.IdAlumno = (int)dgvAlumnos[0, valor].Value;
-            txtNombre.Text = dgvAlumnos[1, valor].Value.ToString();
-            txtApellido.Text = dgvAlumnos[2, valor].Value.ToString();
-            txtDni.Text = dgvAlumnos[3, valor].Value.ToString();
-            txtEdad.Text = dgvAlumnos[4, valor].Value.ToString();
-            txtEmail.Text = dgvAlumnos[5, valor].Value.ToString();
-        }
-        private void BtnEliminar_Click(object sender, EventArgs e)
-        {
-            eliminarAlumno();
-            buscarTodos();
-        }
     }
 
 }

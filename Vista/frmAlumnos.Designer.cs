@@ -78,7 +78,6 @@
             this.GbAlta.Size = new System.Drawing.Size(383, 370);
             this.GbAlta.TabIndex = 19;
             this.GbAlta.TabStop = false;
-            this.GbAlta.Text = "ALTA ALUMNO";
             // 
             // txtApellido
             // 
@@ -129,6 +128,7 @@
             this.txtEdad.Name = "txtEdad";
             this.txtEdad.Size = new System.Drawing.Size(191, 22);
             this.txtEdad.TabIndex = 4;
+            this.txtEdad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtEdad_KeyPress);
             // 
             // txtDni
             // 
@@ -136,6 +136,7 @@
             this.txtDni.Name = "txtDni";
             this.txtDni.Size = new System.Drawing.Size(191, 22);
             this.txtDni.TabIndex = 3;
+            this.txtDni.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDni_KeyPress);
             // 
             // txtNombre
             // 
@@ -198,6 +199,7 @@
             this.BtnSalir.TabIndex = 21;
             this.BtnSalir.Text = "Salir";
             this.BtnSalir.UseVisualStyleBackColor = true;
+            this.BtnSalir.Click += new System.EventHandler(this.BtnSalir_Click);
             // 
             // frmAlumnos
             // 
@@ -209,7 +211,7 @@
             this.Controls.Add(this.GbAlta);
             this.Controls.Add(this.dgvAlumnos);
             this.Name = "frmAlumnos";
-            this.Text = "Form1";
+            this.Text = "Alta/Baja/Modificación";
             this.Load += new System.EventHandler(this.frmAlumnos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAlumnos)).EndInit();
             this.GbAlta.ResumeLayout(false);
